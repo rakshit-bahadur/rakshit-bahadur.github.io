@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rakshit Bahadur</title>
+<meta name="description" content="Rakshit Bahadur - Senior Data Engineer. AWS, PySpark, Databricks, Snowflake, Airflow, dbt, Kafka.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single column, hero shows a data pipeline (source -> ingest -> transform -> serve) built from the real stack */
+:root {
+  --bg: #f4f6f7;
+  --surface: #ffffff;
+  --fg: #14212b;
+  --muted: #5a6b76;
+  --line: #d8e0e4;
+  --accent: #0b7a83;
+  --accent-soft: #e0f1f2;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1519;
+    --surface: #152027;
+    --fg: #e4ecef;
+    --muted: #93a6b0;
+    --line: #26343c;
+    --accent: #4fc3cb;
+    --accent-soft: #15333a;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding-block: 56px 40px;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+.label {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: 18px; }
+.status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 13px; color: var(--accent);
+}
+.status::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.hero h1 { font-size: clamp(40px, 8vw, 68px); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; }
+.role { font-family: var(--display); font-weight: 500; font-size: clamp(20px, 3vw, 26px); color: var(--muted); margin: 0; }
+.intro { max-width: 62ch; margin: 0; }
+.links { display: flex; flex-wrap: wrap; gap: 10px 22px; font-weight: 600; }
+
+/* Pipeline */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  overflow: hidden;
+  margin-top: 10px;
+}
+.stage { padding: 18px 18px 20px; border-left: 1px solid var(--line); position: relative; min-width: 0; }
+.stage:first-child { border-left: 0; }
+.stage:not(:last-child)::after {
+  content: ""; position: absolute; right: -6px; top: 22px; width: 10px; height: 10px;
+  background: var(--surface); border-top: 1px solid var(--line); border-right: 1px solid var(--line);
+  transform: rotate(45deg); z-index: 1;
+}
+.stage .label { color: var(--accent); }
+.stage ul { list-style: none; padding: 0; margin: 10px 0 0; font-family: var(--mono); font-size: 14px; line-height: 1.8; }
+
+/* Sections */
+section { display: flex; flex-direction: column; gap: 22px; }
+section > h2 { font-size: 28px; font-weight: 700; }
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.project {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0;
+}
+.project h3 { font-size: 19px; font-weight: 700; }
+.project p { margin: 0; color: var(--muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
+.tags span {
+  font-family: var(--mono); font-size: 12px; padding: 3px 8px;
+  border-radius: 4px; background: var(--accent-soft); color: var(--fg);
+}
+
+.timeline { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.timeline li {
+  display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 6px 24px;
+  padding: 18px 0; border-bottom: 1px solid var(--line);
+}
+.timeline .org { font-family: var(--display); font-weight: 700; }
+.timeline .what { margin: 0; color: var(--muted); }
+
+.skills { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 10px 24px; margin: 0; }
+.skills dt { font-family: var(--mono); font-size: 13px; color: var(--muted); padding-top: 3px; }
+.skills dd { margin: 0; }
+
+.contact {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 28px; display: flex; flex-direction: column; gap: 12px;
+}
+.contact p { margin: 0; max-width: 60ch; }
+.contact .mono { font-family: var(--mono); font-size: 15px; }
+.badge-slot:empty { display: none; }
+
+footer { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+
+@media (max-width: 720px) {
+  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stage:nth-child(3) { border-left: 0; }
+  .stage:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .stage:nth-child(2)::after { display: none; }
+  .projects { grid-template-columns: 1fr; }
+  .timeline li, .skills { grid-template-columns: 1fr; }
+  .skills dd { margin-bottom: 8px; }
+}
+@media (max-width: 420px) {
+  .pipeline { grid-template-columns: 1fr; }
+  .stage { border-left: 0; }
+  .stage + .stage { border-top: 1px solid var(--line); }
+  .stage::after { display: none; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero">
+    <span class="status">Open to freelance and contract work</span>
+    <h1>Rakshit Bahadur</h1>
+    <p class="role">Senior Data Engineer</p>
+    <p class="intro">I build data pipelines and data platforms on AWS, Databricks and Snowflake. I have about 5.5 years of experience moving data from many sources into clean, reliable tables that teams can trust. I currently work in the travel domain at American Express GBT.</p>
+    <nav class="links" aria-label="Profiles">
+      <a href="https://github.com/rakshitbahadur-dev" target="_blank" rel="noopener">GitHub</a>
+      <!-- Replace the # below with your LinkedIn profile link -->
+      <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+      <!-- Replace the # below with your Toptal profile link -->
+      <a href="#" target="_blank" rel="noopener">Toptal</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="pipeline" aria-label="My data pipeline stack">
+      <div class="stage">
+        <div class="label">Ingest</div>
+        <ul><li>Kafka</li><li>AWS Glue</li><li>Python</li></ul>
+      </div>
+      <div class="stage">
+        <div class="label">Store</div>
+        <ul><li>S3 + Iceberg</li><li>Delta Lake</li><li>Redshift</li></ul>
+      </div>
+      <div class="stage">
+        <div class="label">Transform</div>
+        <ul><li>PySpark</li><li>dbt</li><li>SQL</li></ul>
+      </div>
+      <div class="stage">
+        <div class="label">Orchestrate</div>
+        <ul><li>Airflow</li><li>Step Functions</li><li>Databricks Jobs</li></ul>
+      </div>
+    </div>
+  </header>
+
+  <section aria-labelledby="work-h">
+    <h2 id="work-h">Selected work</h2>
+    <div class="projects">
+      <article class="project">
+        <div class="label">Client work</div>
+        <h3>SSIS to Databricks migration</h3>
+        <p>Moving legacy SSIS packages to Databricks and PySpark. Tuned jobs for large data with adaptive query execution, salting for skewed joins, and caching.</p>
+        <div class="tags"><span>Databricks</span><span>PySpark</span><span>Delta</span><span>SSIS</span></div>
+      </article>
+      <article class="project">
+        <div class="label">Client work</div>
+        <h3>Kafka to ServiceNow events</h3>
+        <p>Streaming integration that sends system events from Kafka into ServiceNow Event Management, so support teams see alerts in one place.</p>
+        <div class="tags"><span>Kafka</span><span>Python</span><span>ServiceNow</span></div>
+      </article>
+      <article class="project">
+        <div class="label">Open source</div>
+        <h3><a href="https://github.com/rakshitbahadur-dev" target="_blank" rel="noopener">LLM Cost and Query Optimizer</a></h3>
+        <p>A Streamlit app that reviews Snowflake and Databricks SQL queries with an LLM and suggests ways to make them faster and cheaper.</p>
+        <div class="tags"><span>Python</span><span>Streamlit</span><span>Groq API</span><span>Snowflake</span></div>
+      </article>
+      <article class="project">
+        <div class="label">Open source</div>
+        <h3><a href="https://github.com/rakshitbahadur-dev" target="_blank" rel="noopener">FlightPriceTracker</a></h3>
+        <p>End-to-end pipeline that tracks flight prices with a bronze, silver and gold (medallion) design on Delta tables.</p>
+        <div class="tags"><span>Databricks</span><span>Delta</span><span>Medallion</span></div>
+      </article>
+      <article class="project">
+        <div class="label">Open source</div>
+        <h3><a href="https://github.com/rakshitbahadur-dev" target="_blank" rel="noopener">WeatherDataWarehouse</a></h3>
+        <p>A small weather data warehouse. Pulls data from the Open-Meteo API, loads it into DuckDB and models it with dbt.</p>
+        <div class="tags"><span>dbt Core</span><span>DuckDB</span><span>Python</span></div>
+      </article>
+      <article class="project">
+        <div class="label">Open source</div>
+        <h3><a href="https://github.com/rakshitbahadur-dev" target="_blank" rel="noopener">Analytics projects</a></h3>
+        <p>E-commerce data warehouse, fraud detection pipeline, stock market analysis and sentiment analysis, with dashboards in Plotly Dash and Tableau.</p>
+        <div class="tags"><span>SQL</span><span>Plotly Dash</span><span>Tableau</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="exp-h">
+    <h2 id="exp-h">Experience</h2>
+    <ul class="timeline">
+      <li>
+        <div><div class="org">American Express GBT</div><div class="label">via IntraEdge · current</div></div>
+        <p class="what">Senior Data Engineer in the travel domain. Data pipeline migration to Databricks and Kafka-based event integration.</p>
+      </li>
+      <li>
+        <div><div class="org">American Express</div><div class="label">Data Engineer</div></div>
+        <p class="what">Built and ran data pipelines on AWS using Glue, EMR, Step Functions and Redshift.</p>
+      </li>
+      <li>
+        <div><div class="org">Xenonstack</div><div class="label">Data Engineer</div></div>
+        <p class="what">Data engineering work on cloud data platforms and ETL pipelines.</p>
+      </li>
+      <li>
+        <div><div class="org">Cognizant</div><div class="label">Data Engineer</div></div>
+        <p class="what">Started my career building ETL jobs and writing SQL for enterprise data.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="skills-h">
+    <h2 id="skills-h">Skills</h2>
+    <dl class="skills">
+      <dt>Cloud</dt><dd>AWS: Glue, Step Functions, EMR, Redshift, S3, Iceberg</dd>
+      <dt>Processing</dt><dd>PySpark, Apache Spark, Python, SQL</dd>
+      <dt>Platforms</dt><dd>Databricks, Snowflake</dd>
+      <dt>Orchestration</dt><dd>Apache Airflow, AWS Step Functions</dd>
+      <dt>Modeling</dt><dd>dbt, medallion architecture, data warehousing</dd>
+      <dt>Streaming</dt><dd>Apache Kafka</dd>
+      <dt>Education</dt><dd>B.E. Computer Science and Engineering, LNCT Bhopal, 2016 to 2020</dd>
+    </dl>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="contact">
+      <h2 id="contact-h">Let's work together</h2>
+      <p>I'm available for freelance data engineering work: new pipelines, migrations to Databricks or Snowflake, and making slow Spark or SQL jobs faster.</p>
+      <!-- Replace with your email address -->
+      <p class="mono">your-email@example.com</p>
+      <p class="label">Based in Noida / Gurugram, India · works with clients worldwide</p>
+      <!-- Paste your Toptal badge code inside this div -->
+      <div class="badge-slot"></div>
+    </div>
+  </section>
+
+  <footer>© 2026 Rakshit Bahadur</footer>
+</main>
+</body>
+</html>
